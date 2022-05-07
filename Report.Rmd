@@ -17,12 +17,54 @@ library(stringr)
 library(ggplot2)
 ```
 
-```{r carga_datos, include=FALSE}
-exploits <- read_csv("files_exploits.csv")
-shellcodes <- read_csv("files_shellcodes.csv")
+```{r carga_datos, include=FALSE, warning=FALSE}
+exploits <- read_csv("./files_exploits.csv")
+shellcodes <- read_csv("./files_shellcodes.csv")
 ```
 
-## R Markdown
+## Definición del proyecto
+
+## Origen de los datos
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+
+## Exploracion de las variables
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+
+## Pregunta 1: blablabla
+
+Esta es la pregunta
+
+### Tranforamaciones aplicadas
+Hemos seleccionado X columnes
+Hemos filtrado las filas de la columna X por el valor Y
+Hemos cruzado el data frame A con el data frame B usando la columna X e Y...
+
+
+
+
+## Pregunta 2: blablabla
+Esta es la pregunta
+
+### Tranforamaciones aplicadas
+Hemos seleccionado X columnes
+Hemos filtrado las filas de la columna X por el valor Y
+Hemos cruzado el data frame A con el data frame B usando la columna X e Y...
+
+
+## Pregunta 3: blablabla
+
+Esta es la pregunta
+
+### Tranforamaciones aplicadas
+Hemos seleccionado X columnes
+Hemos filtrado las filas de la columna X por el valor Y
+Hemos cruzado el data frame A con el data frame B usando la columna X e Y...
+
+
+## Conclusiones
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
