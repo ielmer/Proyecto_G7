@@ -5,7 +5,16 @@ date: '2022-05-05'
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# evitar que se muestre la orden de codigo, solo mostrar resultado de ejecucion
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r carga_packages, include=FALSE}
+library(readr)
+library(dplyr)
+library(stringr)
+library(ggplot2)
 ```
 
 ## R Markdown
