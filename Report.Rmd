@@ -22,6 +22,12 @@ exploits <- read_csv("./files_exploits.csv")
 shellcodes <- read_csv("./files_shellcodes.csv")
 ```
 
+
+```{r ajustar_tipos_columnas}
+# convertir columna platform (actualmente character) a factor (la reasigno a la misma columna directamente)
+exploits$platform <- as.factor(exploits$platform)
+```
+
 ## Definición del proyecto
 
 ## Origen de los datos
@@ -78,8 +84,13 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r grafico_platform, echo=FALSE}
+# mostrar top 10 platforms
+exploits_top_platforms <- exploits %>% group_by(platform) %>% summarise(total = n())
+exploits_top_platforms <- arrange(exploits_top_platforms, desc(total))
+ggplot(exploits_top_platforms)  + geom_count()
+exploits_top_platforms <- exploits_top_platforms[1:10,] 
+qplot(x=exploits_top_platforms)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
