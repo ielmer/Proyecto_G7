@@ -12,93 +12,16 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r carga_packages, include=FALSE}
 library(readr)
+```
+
+
+```{r carga_packages, include=FALSE}
 library(dplyr)
 library(stringr)
 library(ggplot2)
 ```
 
-```{r carga_datos, include=FALSE, warning=FALSE}
-exploits <- read_csv("./files_exploits.csv")
-shellcodes <- read_csv("./files_shellcodes.csv")
-```
-
-
-```{r ajustar_tipos_columnas}
-# convertir columna platform (actualmente character) a factor (la reasigno a la misma columna directamente)
-exploits$platform <- as.factor(exploits$platform)
-exploits$type <- as.factor(exploits$type)
-
-# rename file column to avoid conflicts
-exploits$files <- exploits$file
-exploits$file <-  NULL
-```
-
-## Definición del proyecto
-
-## Origen de los datos
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-
-## Exploracion de las variables
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-```{r exploracion}
-n <- names(exploits)
-# transparencias sesion 4 slide 14
-par(mfrow = c(2, 4))
-with(exploits,{
-  #fila 1
-  plot(id)
-  plot(type)
-  plot(platform)
-  plot(type)
-  # fila 2
-  plot(platform)
-  plot(platform)
-  plot(platform)
-
-})
-
-# with(exploits, {
-#   plot(platform,  main = "Ozone and Wind")
-#   plot(type, main = "Ozone and Solar Radiation")
-#   plot(date, main = "Ozone and Temperature")
-# })
-```
-
-## Pregunta 1: blablabla
-
-Esta es la pregunta
-
-### Tranforamaciones aplicadas
-Hemos seleccionado X columnes
-Hemos filtrado las filas de la columna X por el valor Y
-Hemos cruzado el data frame A con el data frame B usando la columna X e Y...
-
-
-
-
-## Pregunta 2: blablabla
-Esta es la pregunta
-
-### Tranforamaciones aplicadas
-Hemos seleccionado X columnes
-Hemos filtrado las filas de la columna X por el valor Y
-Hemos cruzado el data frame A con el data frame B usando la columna X e Y...
-
-
-## Pregunta 3: blablabla
-
-Esta es la pregunta
-
-### Tranforamaciones aplicadas
-Hemos seleccionado X columnes
-Hemos filtrado las filas de la columna X por el valor Y
-Hemos cruzado el data frame A con el data frame B usando la columna X e Y...
-
-
-## Conclusiones
+## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
@@ -112,24 +35,8 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r grafico_platform, echo=FALSE}
-# mostrar top 10 platforms
-exploits_top_platforms <- exploits %>% group_by(platform) %>% summarise(total = n())
-
-#exploits_top_platforms <- arrange(exploits_top_platforms, desc(total))
-
-exploits %>%
-group_by(platform) %>%
-  count %>% 
-  filter(n > 500) %>%
-  ggplot(aes(x = platform, y = n)) + 
-  geom_bar(stat = "identity")
+```{r pressure, echo=FALSE}
+plot(pressure)
 ```
-
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-```{r graficotype, echo=FALSE}
-
-qplot(exploits$type)
-```
