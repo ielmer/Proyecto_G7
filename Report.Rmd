@@ -11,14 +11,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ```{r carga_packages, include=FALSE}
-library(readr)
-```
-
-
-```{r carga_packages, include=FALSE}
 library(dplyr)
 library(stringr)
 library(ggplot2)
+library(readr)
 ```
 
 ## R Markdown
