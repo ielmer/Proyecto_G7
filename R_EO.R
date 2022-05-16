@@ -207,7 +207,8 @@ starwars##base de datos cargadas por defecto
 starwars %>% select(height)
 
 data()##total de base de datos precargadas
-CO2
+CR=CO2%>%nrows=10,skip.head = 10
+
 view(CO2)##ver las distintas columnas que tiene la base de datos
 view(starwars)
 starwars$height%>%mean(na.rm=TRUE) ##Promedio de una columna eliminando los NA
