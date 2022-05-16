@@ -17,10 +17,9 @@ library(stringr)
 library(ggplot2)
 ```
 
-<<<<<<< HEAD
-## PREGUNTAS
+#### PREGUNTAS
 
-1. DatasetsInforme de virus.csv
+1. Datasets Informe de virus.csv
 2. Packages tidyverse
 3. Análisis exploratorio de los incidentes
 4. ¿Cuál es el origen de las amenazas?
@@ -28,7 +27,8 @@ library(ggplot2)
 6. ¿Cómo se realizaron los ataques?
 7. ¿Qué podemos hacer para prevenir futuros ataques?
 8. ¿Cómo podemos protegernos?
-=======
+
+
 #### **1. Datasets**
 
 --TBD
@@ -48,7 +48,9 @@ library(ggplot2)
 
 #### **5. ¿Cuál fue el objetivo?**
 
---TBD
+Se reviso el MITRE Cyber Analytics Repository (CAR) es una base de conocimiento de análisis desarrollada por MITRE basada en el modelo adversario MITRE ATT&CK. CAR define un modelo de datos que se aprovecha en sus representaciones de pseudocódigo, pero también incluye implementaciones dirigidas directamente a herramientas específicas (por ejemplo, Splunk, EQL) en su análisis. Con respecto a la cobertura, CAR se enfoca en proporcionar un conjunto de análisis validados y bien explicados, en particular con respecto a su teoría y justificación operativa.
+En base a ello se puede indicar que exite relacion con CAR-2020-11-009: Compiled HTML Access
+
 
 #### **6. ¿Cómo se realizaron los ataques?**
 
