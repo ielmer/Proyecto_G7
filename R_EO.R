@@ -364,9 +364,84 @@ base_infectados%>%table()%>%select(Device,`Detected object`)
 #######################################
 #######################################
 
+Informe_de_virus
+Informe_de_virus%>%select(Device,`Object type`)
+summarise(calificacion_mediana=median(calificaciones))#dos consulas, agruparlos por sexo y CALCULAR LA MEDIANA
 
-Informe_de_virus%>%head()
-titanic%>%head()
+
+a=Informe_de_virus%>%select(Device,`Object type`)%>%arrange(Device,`Object type`)
+
+W=Informe_de_virus%>%select(Device,`Object type`)
+
+group_by(w,`Object type`)
+
+##primera consulta
+(Inf_n=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias)))
+(Inf_2=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(15))
+
+qplot(data=Inf_2, x=Device, y=n_incidencias,color=`Object type`)
+
+##Segunda consulta
+wt=Informe_de_virus%>%select(`Object type`)%>%group_by(`Object type`)%>%summarise(n_incidencias = n())
+pie(wt$n_incidencias,wt$`Object type`)
+
+
+
+
+
+
+
+
+
+#(Inf_1=Informe_de_virus%>%select(`Object type`)%>`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(15))
+#qplot(data=Inf_1, x=Device, y=n_incidencias,color=`Object type`)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+install.packages("dplyr")
+
+
+
+pie()
+
+
+install.packages("lessR")
+library(lessR)
+
+PieChart(`Object type`,n_incidencias)
+
+
+#r <- d + geom_bar()
+
+
+
+
+#%>%group_by(`Object type`)%>%count(`Object type`)
+#starWars%>%select(name,mass,height,indice)
+#%>%summarise(Total_incidentes=count()
+#Informe_de_virus%>%group_by(`Object type`)
+
+
+
+
+
+
 
 
 
