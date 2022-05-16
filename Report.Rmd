@@ -16,33 +16,41 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 ```
-1. 
+#### **1. Objetivos**
+El objetivo de este trabajo es analizar distintas fuentes de datos, relevantes y concernientes a ciberseguridad de una empresa. Con el fin de que dichos datos sean procesados y se pueda obtener información útil para la toma de decisiones a nivel técnico. Otro de los objetivos que persigue este trabajo, es evitar futuros incidentes que desemboquen en la paralización de servicios críticos para la organización
 
-#### **1. Datasets**
+#### **2. Datasets**
+Informes: 
+- Informes de virus.csv
+- Informes de ataques de red.cvs
 
---TBD
+#### **3. Packages**
+- readr
+- dplyr
+- stringr
+- ggplot2
+- tidyverse
+- readxl
+- qplot
+- markdown
 
-#### **2. Packages**
-
---TBD
-
-#### **3. Análisis exploratorio de los incidentes**
-
---TBD
-
-#### **4. ¿Cuál es el origen de las amenazas?**
-
---TBD
-
-#### **5. ¿Cuál fue el objetivo?**
-
---TBD
-
-#### **6. ¿Cómo se realizaron los ataques?**
+#### **4. Análisis exploratorio de los incidentes**
 
 --TBD
 
-#### **7. ¿Qué podemos hacer para prevenir futuros ataques?**
+#### **5. ¿Cuál es el origen de las amenazas?**
+
+--TBD
+
+#### **6. ¿Cuál fue el objetivo?**
+
+--TBD
+
+#### **7. Cómo se realizaron los ataques?**
+
+--TBD
+
+#### **8. ¿Qué podemos hacer para prevenir futuros ataques?**
 
 We  should always keep our  operating system up to date on our devices. Outdated systems are more vulnerable, malware and viruses exploit this weakness.
 
