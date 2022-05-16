@@ -16,7 +16,6 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 ```
-
 #### PREGUNTAS
 
 1. Datasets Informe de virus.csv
@@ -54,7 +53,8 @@ En base a ello se puede indicar que exite relacion con CAR-2020-11-009: Compiled
 
 #### **6. ¿Cómo se realizaron los ataques?**
 
---TBD
+Algunos sitios web están plagados de anuncios que aparecen cada vez que hacemos clikc en cualquier sección de la página web o incluso pueden aparecer inmediatamente cada vez que accedes a ciertos sitios web. Si bien el objetivo de estos anuncios es, en general, generar ingresos para estos sitios, tambien contienen varios tipos de malware que pueden descargarse involuntariamente en los dispositivos. Algunos anuncios incluso usan como táctica generar temor al indicar al usuario que su dispositivo ha sido comprometido y que solo la solución de seguridad que ofrece el anuncio puede limpiar su equipo.
+
 
 #### **7. ¿Qué podemos hacer para prevenir futuros ataques?**
 
