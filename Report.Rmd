@@ -38,7 +38,7 @@ Informes:
 
 #### **4. Análisis exploratorio de los incidentes**
 
---TBD
+Informe_de_virus%>%head()
 
 #### **5. ¿Cuál es el origen de las amenazas?**
 
