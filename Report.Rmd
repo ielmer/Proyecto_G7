@@ -17,18 +17,16 @@ library(stringr)
 library(ggplot2)
 ```
 
-## R Markdown
-1. Datasets
-Informe de virus.csv
+## PREGUNTAS
 
-2 Packages
-tidyverse
+1. DatasetsInforme de virus.csv
+2. Packages tidyverse
 3. Análisis exploratorio de los incidentes
 4. ¿Cuál es el origen de las amenazas?
-5 ¿Cuál fue el objetivo?
-6 ¿Cómo se realizaron los ataques?
-7 ¿Qué podemos hacer para prevenir futuros ataques?
-8 ¿Cómo podemos protegernos?
+5. ¿Cuál fue el objetivo?
+6. ¿Cómo se realizaron los ataques?
+7. ¿Qué podemos hacer para prevenir futuros ataques?
+8. ¿Cómo podemos protegernos?
 
 
 
