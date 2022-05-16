@@ -1,5 +1,5 @@
 ---
-title: "Report"
+title: "Análisis y Predicción de Ataques de Malware"
 output: html_document
 date: '2022-05-05'
 ---
@@ -17,6 +17,7 @@ library(stringr)
 library(ggplot2)
 ```
 
+<<<<<<< HEAD
 ## PREGUNTAS
 
 1. DatasetsInforme de virus.csv
@@ -27,18 +28,45 @@ library(ggplot2)
 6. ¿Cómo se realizaron los ataques?
 7. ¿Qué podemos hacer para prevenir futuros ataques?
 8. ¿Cómo podemos protegernos?
+=======
+#### **1. Datasets**
 
+--TBD
+>>>>>>> aeba9751eefaebc640d28083975d893fc654edfa
 
+#### **2. Packages**
 
+--TBD
 
+#### **3. Análisis exploratorio de los incidentes**
 
+--TBD
 
+#### **4. ¿Cuál es el origen de las amenazas?**
 
+--TBD
 
+#### **5. ¿Cuál fue el objetivo?**
 
+--TBD
 
+#### **6. ¿Cómo se realizaron los ataques?**
 
+--TBD
 
+#### **7. ¿Qué podemos hacer para prevenir futuros ataques?**
+
+We  should always keep our  operating system up to date on our devices. Outdated systems are more vulnerable, malware and viruses exploit this weakness.
+
+#### **8. ¿Cómo podemos protegernos?**
+
+Safety settings we can enable on our computers to protect from a potential adware download is setting our browser to block pop-ups or scanning each file we download with an antivirus. This antivirus will also give real-time protection against both malware and spyware.
+
+##### Adware Removal
+
+If you have adware on your device and get tired of closing tabs that kill your battery, take action. To remove adware on your device, you need a dedicated adware removal tool like the Panda Cleanup.
+
+----------------------------------
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
