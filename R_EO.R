@@ -369,13 +369,6 @@ Starwars_AB=Starwars_A%>%bind_rows(Starwars_B)#otra forma de hacer lo mismo
 
 
 
-
-
-
-
-
-
-
 #########################################
 #########################################
 base_infectados=read_xlsx("C:/Users/elmer/Desktop/Repositorio/Proyecto_G7/Informe de virus.xlsx",sheet="Detalles",range="A1:O1460")
@@ -442,6 +435,7 @@ Inf_4=Informe_de_virus%>%select(`Detected at`,Device,Account,`Object type`,`Path
 glimpse(Inf_4)
 install.packages("lubridate",dependencies = TRUE)
 library(lubridate)
+
 fecha_tiempo=parse_date_time(Inf_4$`Detected at`,"dmy HM")
 
 df=as.data.frame(fecha_tiempo)
@@ -463,18 +457,47 @@ ggplot(df, aes(x=`fecha`, y=`tiempo`)) + geom_line()
 #qplot(data=Inf_1, x=Device, y=n_incidencias,color=`Object type`)
 
 
-Inf_5=Inf_4
+Inf_5=Inf_4%>%mutate(fecha_hora=parse_date_time(Inf_4$`Detected at`,"dmy HM"))%>%
+  filter(fecha_hora>= as.Date('2022-04-27'),
+         fecha_hora<= as.Date('2022-05-04'))%>%
+  group_by(horas=floor_date(fecha_hora,unit = 'hour'))%>%
+  summarise(conteo=n())
 
+## rellenando lo ceros
+horas_completas=data.frame(
+  horas=seq(floor_date(min(Inf_5$horas),unit = 'hour'),
+            floor_date(max(Inf_5$horas),unit = 'hour'),
+            by='hour'))
+##left join con horas
+Inf_5_hora=horas_completas%>%group_by(horas_redondeadas=floor_date(horas,unit = 'hour'))%>%
+  left_join(Inf_5)%>%
+  mutate(conteo= ifelse(is.na(conteo),0,conteo))
+##grafica inicial
+ggplot(data=Inf_5,
+       aes(x=horas,
+           y=conteo)) +
+  geom_line()
 
+##Creando el objeto ts para el modelo
+conteo_ts=ts(Inf_5_hora$conteo,
+             start = 1,
+             frequency = 24)
 
+install.packages('forecast')
+library(forecast)
+ajuste=auto.arima(y=conteo_ts)
+  
+summary(ajuste)
 
+predicciones=forecast(ajuste)
 
+min(predicciones[['lower']])
+max(predicciones[['upper']])
 
+##grafica de predicciones
+p_predict=autoplot(predicciones)
 
-
-
-
-
+p_predict
 
 
 
