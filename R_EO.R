@@ -216,6 +216,8 @@ starwars$height%>%mean(na.rm=TRUE) ##Promedio de una columna eliminando los NA
 ###BASE DE DATOS PARA R
 help("read.csv")
 base=read.csv("C:/Data/Data2.csv",fileEncoding="utf-8",stringsAsFactors=FALSE)
+base_2=read.csv("C:/Users/elmer/Desktop/Repositorio/Proyecto_G7/Informe_de_virus.csv.csv",fileEncoding="utf-8",stringsAsFactors=FALSE)
+
 
 base$CyberattackType%>%table()#suma total por tipo de elementao
 base$CyberattackType%>%table()%>%prop.table()#lo mismo que la consulta anterio pero en porcentaje
@@ -351,6 +353,29 @@ ggplot(data, aes(x=wt, y=mpg))+geom_point()
 ggplot(data, aes(x=cyl, y=mpg))+geom_violin()
 
 
+##COMBINACIONES DE DATAFRAMES
+
+Starwars = data.frame(starwars)
+#dividir en dos el dataframe
+Starwars_A=Starwars[1:40,]
+Starwars_B=Starwars[41:87,]
+
+##Apilar las bases de forma vertical
+Starwars_AB=bind_rows(Starwars_A,Starwars_B)
+
+Starwars_AB=Starwars_A%>%bind_rows(Starwars_B)#otra forma de hacer lo mismo
+
+
+
+
+
+
+
+
+
+
+
+
 #########################################
 #########################################
 base_infectados=read_xlsx("C:/Users/elmer/Desktop/Repositorio/Proyecto_G7/Informe de virus.xlsx",sheet="Detalles",range="A1:O1460")
@@ -365,6 +390,9 @@ base_infectados%>%table()%>%select(Device,`Detected object`)
 #######################################
 #######################################
 
+
+
+
 Informe_de_virus
 Informe_de_virus%>%select(Device,`Object type`)
 summarise(calificacion_mediana=median(calificaciones))#dos consulas, agruparlos por sexo y CALCULAR LA MEDIANA
@@ -376,21 +404,58 @@ W=Informe_de_virus%>%select(Device,`Object type`)
 
 group_by(w,`Object type`)
 
-##primera consulta
-(Inf_n=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias)))
-(Inf_2=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(15))
 
-qplot(data=Inf_2, x=Device, y=n_incidencias,color=`Object type`)
 
-##Segunda consulta
+
+##Primera consulta
 wt=Informe_de_virus%>%select(`Object type`)%>%group_by(`Object type`)%>%summarise(n_incidencias = n())
 pie(wt$n_incidencias,wt$`Object type`)
 
 
+install.packages("pie3D")
+install.packages("plotrix")
+library(plotrix)
+pie3D(wt$n_incidencias,labels = wt$`Object type`,explode = 0.2,border = "white", main = "Incidencias")
 
 
+pie3D
+
+##Segunda consulta
+(Inf_n=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias)))
+(Inf_2=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(15))
+
+qplot(data=Inf_2, x=Device, y=n_incidencias,color=`Object type`)
+ggplot(Inf_2, aes(x=Device, y=n_incidencias,color=`Object type`)) + geom_count(size=7)
 
 
+##Tercera consulta
+(Inf_3=Informe_de_virus%>%select(Device,`Object type`,Action,Details,Account)%>%group_by(Device,`Object type`,Action,Account)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(10))
+
+ggplot(Inf_3, aes(x=Account, y=n_incidencias,color=`Object type`)) + geom_count(size=7)
+
+
+##Cuarta consulta
+Inf_4=Informe_de_virus%>%select(`Detected at`,Device,Account,`Object type`,`Path to file`,Details,Action)
+
+
+##Quinta consulta
+glimpse(Inf_4)
+install.packages("lubridate",dependencies = TRUE)
+library(lubridate)
+fecha_tiempo=parse_date_time(Inf_4$`Detected at`,"dmy HM")
+
+df=as.data.frame(fecha_tiempo)
+df$fecha=date(df$fecha_tiempo)
+
+df$tiempo=format(df$fecha_tiempo,format = "%H:%M")
+
+qplot(data=df, x=df$fecha, y=df$tiempo)
+qplot(data=df, x=df$fecha)
+qplot(data=df, x=df$tiempo)
+
+
+ggplot(df, aes(x=`fecha`, y=`tiempo`)) + geom_line()
+##*******************************************##
 
 
 
@@ -398,7 +463,7 @@ pie(wt$n_incidencias,wt$`Object type`)
 #qplot(data=Inf_1, x=Device, y=n_incidencias,color=`Object type`)
 
 
-
+Inf_5=Inf_4
 
 
 
@@ -439,7 +504,10 @@ PieChart(`Object type`,n_incidencias)
 #Informe_de_virus%>%group_by(`Object type`)
 
 
-
+library(readr)
+Informe_de_virus_2 <- read_delim("Informe de virus.csv", 
+                               delim = ";", escape_double = FALSE, trim_ws = TRUE)
+View(Informe_de_virus)
 
 
 
