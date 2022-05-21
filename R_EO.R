@@ -225,6 +225,7 @@ nrow(base)##numero total de filas
 install.packages('readxl')
 library(readxl)
 library(tidyverse)
+library(markdown)
 base_usuarios=read_xlsx("C:/Data/UdeDmasI.xlsx",sheet="Details",range="A1:M447")
 base_usuarios$`Detected object` %>% table()
 base_usuarios$`Detected object` %>% table()%>%addmargins()
@@ -323,6 +324,7 @@ qplot(data=base_iris, x=Petal.Width, y=Petal.Length,size=Species)
 ggplot(data=base_iris, aes(x=Petal.Width, y=Petal.Length, color=Species))+
   geom_point() + theme_light()
 
+
 ggplot(data=base_iris, aes(x=Petal.Width, y=Petal.Length, color=Species))+
   geom_point() + facet_grid(.~Species)
 
@@ -351,13 +353,20 @@ ggplot(data, aes(x=cyl, y=mpg))+geom_violin()
 #########################################
 #########################################
 base_infectados=read_xlsx("C:/Users/elmer/Desktop/Repositorio/Proyecto_G7/Informe de virus.xlsx",sheet="Detalles",range="A1:O1460")
+
+
 base_infectados$`Detected object` %>% table()
 base_infectados$`Detected object` %>% table()
 qplot(data=base_infectados, x=`Detected object`)
 qplot(data=base_infectados, x=`Detected object`,color=`Detected object`)
 
 base_infectados%>%table()%>%select(Device,`Detected object`)
+#######################################
+#######################################
 
+
+Informe_de_virus%>%head()
+titanic%>%head()
 
 
 
