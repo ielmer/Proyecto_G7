@@ -38,7 +38,13 @@ Informes:
 
 #### **4. Análisis exploratorio de los incidentes**
 
+virus= Informe_de_virus
+
+```{r virus}
+summary(iris)
+
 Informe_de_virus%>%head()
+```
 
 #### **5. ¿Cuál es el origen de las amenazas?**
 

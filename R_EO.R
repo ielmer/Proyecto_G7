@@ -207,7 +207,8 @@ starwars##base de datos cargadas por defecto
 starwars %>% select(height)
 
 data()##total de base de datos precargadas
-CO2
+CR=CO2%>%nrows=10,skip.head = 10
+
 view(CO2)##ver las distintas columnas que tiene la base de datos
 view(starwars)
 starwars$height%>%mean(na.rm=TRUE) ##Promedio de una columna eliminando los NA
@@ -215,6 +216,8 @@ starwars$height%>%mean(na.rm=TRUE) ##Promedio de una columna eliminando los NA
 ###BASE DE DATOS PARA R
 help("read.csv")
 base=read.csv("C:/Data/Data2.csv",fileEncoding="utf-8",stringsAsFactors=FALSE)
+base_2=read.csv("C:/Users/elmer/Desktop/Repositorio/Proyecto_G7/Informe_de_virus.csv.csv",fileEncoding="utf-8",stringsAsFactors=FALSE)
+
 
 base$CyberattackType%>%table()#suma total por tipo de elementao
 base$CyberattackType%>%table()%>%prop.table()#lo mismo que la consulta anterio pero en porcentaje
@@ -350,6 +353,22 @@ ggplot(data, aes(x=wt, y=mpg))+geom_point()
 ggplot(data, aes(x=cyl, y=mpg))+geom_violin()
 
 
+##COMBINACIONES DE DATAFRAMES
+
+Starwars = data.frame(starwars)
+#dividir en dos el dataframe
+Starwars_A=Starwars[1:40,]
+Starwars_B=Starwars[41:87,]
+
+##Apilar las bases de forma vertical
+Starwars_AB=bind_rows(Starwars_A,Starwars_B)
+
+Starwars_AB=Starwars_A%>%bind_rows(Starwars_B)#otra forma de hacer lo mismo
+
+
+
+
+
 #########################################
 #########################################
 base_infectados=read_xlsx("C:/Users/elmer/Desktop/Repositorio/Proyecto_G7/Informe de virus.xlsx",sheet="Detalles",range="A1:O1460")
@@ -365,8 +384,156 @@ base_infectados%>%table()%>%select(Device,`Detected object`)
 #######################################
 
 
-Informe_de_virus%>%head()
-titanic%>%head()
+
+
+Informe_de_virus
+Informe_de_virus%>%select(Device,`Object type`)
+summarise(calificacion_mediana=median(calificaciones))#dos consulas, agruparlos por sexo y CALCULAR LA MEDIANA
+
+
+a=Informe_de_virus%>%select(Device,`Object type`)%>%arrange(Device,`Object type`)
+
+W=Informe_de_virus%>%select(Device,`Object type`)
+
+group_by(w,`Object type`)
+
+
+
+
+##Primera consulta
+wt=Informe_de_virus%>%select(`Object type`)%>%group_by(`Object type`)%>%summarise(n_incidencias = n())
+pie(wt$n_incidencias,wt$`Object type`)
+
+
+install.packages("pie3D")
+install.packages("plotrix")
+library(plotrix)
+pie3D(wt$n_incidencias,labels = wt$`Object type`,explode = 0.2,border = "white", main = "Incidencias")
+
+
+pie3D
+
+##Segunda consulta
+(Inf_n=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias)))
+(Inf_2=Informe_de_virus%>%select(Device,`Object type`)%>%group_by(Device,`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(15))
+
+qplot(data=Inf_2, x=Device, y=n_incidencias,color=`Object type`)
+ggplot(Inf_2, aes(x=Device, y=n_incidencias,color=`Object type`)) + geom_count(size=7)
+
+
+##Tercera consulta
+(Inf_3=Informe_de_virus%>%select(Device,`Object type`,Action,Details,Account)%>%group_by(Device,`Object type`,Action,Account)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(10))
+
+ggplot(Inf_3, aes(x=Account, y=n_incidencias,color=`Object type`)) + geom_count(size=7)
+
+
+##Cuarta consulta
+Inf_4=Informe_de_virus%>%select(`Detected at`,Device,Account,`Object type`,`Path to file`,Details,Action)
+
+
+##Quinta consulta
+glimpse(Inf_4)
+install.packages("lubridate",dependencies = TRUE)
+library(lubridate)
+
+fecha_tiempo=parse_date_time(Inf_4$`Detected at`,"dmy HM")
+
+df=as.data.frame(fecha_tiempo)
+df$fecha=date(df$fecha_tiempo)
+
+df$tiempo=format(df$fecha_tiempo,format = "%H:%M")
+
+qplot(data=df, x=df$fecha, y=df$tiempo)
+qplot(data=df, x=df$fecha)
+qplot(data=df, x=df$tiempo)
+
+
+ggplot(df, aes(x=`fecha`, y=`tiempo`)) + geom_line()
+##*******************************************##
+
+
+
+#(Inf_1=Informe_de_virus%>%select(`Object type`)%>`Object type`)%>%summarise(n_incidencias = n())%>%arrange(desc(n_incidencias))%>%head(15))
+#qplot(data=Inf_1, x=Device, y=n_incidencias,color=`Object type`)
+
+
+Inf_5=Inf_4%>%mutate(fecha_hora=parse_date_time(Inf_4$`Detected at`,"dmy HM"))%>%
+  filter(fecha_hora>= as.Date('2022-04-27'),
+         fecha_hora<= as.Date('2022-05-04'))%>%
+  group_by(horas=floor_date(fecha_hora,unit = 'hour'))%>%
+  summarise(conteo=n())
+
+## rellenando lo ceros
+horas_completas=data.frame(
+  horas=seq(floor_date(min(Inf_5$horas),unit = 'hour'),
+            floor_date(max(Inf_5$horas),unit = 'hour'),
+            by='hour'))
+##left join con horas
+Inf_5_hora=horas_completas%>%group_by(horas_redondeadas=floor_date(horas,unit = 'hour'))%>%
+  left_join(Inf_5)%>%
+  mutate(conteo= ifelse(is.na(conteo),0,conteo))
+##grafica inicial
+ggplot(data=Inf_5,
+       aes(x=horas,
+           y=conteo)) +
+  geom_line()
+
+##Creando el objeto ts para el modelo
+conteo_ts=ts(Inf_5_hora$conteo,
+             start = 1,
+             frequency = 24)
+
+install.packages('forecast')
+library(forecast)
+ajuste=auto.arima(y=conteo_ts)
+  
+summary(ajuste)
+
+predicciones=forecast(ajuste)
+
+min(predicciones[['lower']])
+max(predicciones[['upper']])
+
+##grafica de predicciones
+p_predict=autoplot(predicciones)
+
+p_predict
+
+
+
+
+
+install.packages("dplyr")
+
+
+
+pie()
+
+
+install.packages("lessR")
+library(lessR)
+
+PieChart(`Object type`,n_incidencias)
+
+
+#r <- d + geom_bar()
+
+
+
+
+#%>%group_by(`Object type`)%>%count(`Object type`)
+#starWars%>%select(name,mass,height,indice)
+#%>%summarise(Total_incidentes=count()
+#Informe_de_virus%>%group_by(`Object type`)
+
+
+library(readr)
+Informe_de_virus_2 <- read_delim("Informe de virus.csv", 
+                               delim = ";", escape_double = FALSE, trim_ws = TRUE)
+View(Informe_de_virus)
+
+
+
 
 
 
