@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# Proyecto_G7
-=======
 # Proyect G7
->>>>>>> 481f9b0d17f051c680bb4aeb19f1fd2641ebbd18
+Proyecto G7 fue migrado al repositorio https://github.com/lsebastianguerra/bookdown-first-project
+Despliegado en: https://bookdown.org/lsebastianguerra/FirstBookDownProject/
