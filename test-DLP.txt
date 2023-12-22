@@ -1,0 +1,10 @@
+https://www.github.com
+https://www.github.com/upload
+https://www.github.com/123
+https://www.github.com/123/upload
+https://ww1.github.com
+https://ww2.github.com
+https://ftp.github.com
+https://ssl.github.com
+https://github.com
+https://github.com/123
